@@ -72,7 +72,7 @@ modeling -> random_forest -> n_estimators to 10 and etl->min_price to 50:
 
 ```
 > mlflow run https://github.com/BM2304/nd0821-c2-build-model-workflow-starter.git \
-             -v [the version you want to use, like 1.0.2] \
+             -v [the version you want to use, like 1.0.1] \
              -P hydra_options="etl.sample='sample2.csv'"
 ```
 
