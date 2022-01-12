@@ -2,6 +2,7 @@
 End-to-end ml pipeline for estimating the typical price for a given property based 
 on the price of similar properties in NYC. 
 
+Link to Github: [https://github.com/BM2304/nd0821-c2-build-model-workflow-starter](https://github.com/BM2304/nd0821-c2-build-model-workflow-starter)
 Link to W&B: [https://wandb.ai/bm23/nyc_airbnb](https://wandb.ai/bm23/nyc_airbnb)
 ### Create environment
 Make sure to have conda installed and ready, then create a new environment using the ``environment.yml``
