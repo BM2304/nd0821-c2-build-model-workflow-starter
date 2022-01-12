@@ -49,6 +49,7 @@ def go(config: DictConfig):
             )
 
         if "basic_cleaning" in active_steps:
+            # Remove outliers and null values
             _ = mlflow.run(
                 os.path.join(hydra.utils.get_original_cwd(),
                              "src", "basic_cleaning"),
@@ -64,6 +65,7 @@ def go(config: DictConfig):
             )
 
         if "data_check" in active_steps:
+            # Data checks like distribution and expected columns
             _ = mlflow.run(
                 os.path.join(hydra.utils.get_original_cwd(),
                              "src", "data_check"),
@@ -78,6 +80,7 @@ def go(config: DictConfig):
             )
 
         if "data_split" in active_steps:
+            # Split data in train, validation and test set
             _ = mlflow.run(
                 f"{config['main']['components_repository']}/train_val_test_split",
                 "main",
@@ -90,6 +93,7 @@ def go(config: DictConfig):
             )
 
         if "train_random_forest" in active_steps:
+            # train random forest and upload fitted model
 
             # NOTE: we need to serialize the random forest configuration into JSON
             rf_config = os.path.abspath("rf_config.json")
@@ -119,12 +123,16 @@ def go(config: DictConfig):
             pass
 
         if "test_regression_model" in active_steps:
+            # test a trained model
 
-            ##################
-            # Implement here #
-            ##################
-
-            pass
+            _ = mlflow.run(
+                f"{config['main']['components_repository']}/test_regression_model",
+                "main",
+                parameters={
+                    "mlflow_model": "random_forest_export:prod",
+                    "test_dataset": "test_data.csv:latest"
+                }
+            )
 
 
 if __name__ == "__main__":
